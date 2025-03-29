@@ -78,7 +78,7 @@ def user_input(user_question, selected_language_code):
     st.write("Reply:", output_text)
 
 def main():
-    st.set_page_config(page_title="Chat PDF")  # ✅ Fixed argument format
+    st.set_page_config(page_title="Chat PDF")  
     st.header("Chat with PDF using Gemini 💁")
     
     user_question = st.text_input("Ask a Question from the PDF Files")
@@ -92,10 +92,10 @@ def main():
         "Hindi": "hi"
     }
     selected_language_name = st.selectbox("Select Response Language", list(language_options.keys()))
-    selected_language_code = language_options[selected_language_name]  # ✅ Correct indentation
+    selected_language_code = language_options[selected_language_name]  
 
     if user_question:
-        user_input(user_question, selected_language_code)  # ✅ Pass correct variable
+        user_input(user_question, selected_language_code)  
 
     with st.sidebar:
         st.title("Menu:")
@@ -108,12 +108,21 @@ def main():
                 get_vector_store(text_chunks)
                 st.success("Done")
         
-        if st.button("Summarize PDF"):
-            with st.spinner("Summarizing..."):
-                raw_text = get_pdf_text(pdf_docs)
-                summary = summarize_text(raw_text)
-                st.subheader("Summary:")
-                st.write(summary)
-    
+        if st.button("Summarize PDFs Individually"):
+            with st.spinner("Summarizing each PDF..."):
+                summaries = {}
+                for pdf in pdf_docs:
+                    pdf_name = pdf.name  # Get file name
+                    raw_text = get_pdf_text([pdf])  # Process one PDF at a time
+                    summary = summarize_text(raw_text)  # Summarize individually
+                    summaries[pdf_name] = summary  # Store summary with filename
+                
+                st.subheader("PDF Summaries:")
+                for pdf_name, summary in summaries.items():
+                    st.write(f"**📄 {pdf_name}**")  
+                    st.write(summary)
+                    st.download_button(f"⬇ Download {pdf_name} Summary", summary, file_name=f"{pdf_name}_summary.txt")  
+                    st.write("---")  
+
 if __name__ == "__main__":
     main()
