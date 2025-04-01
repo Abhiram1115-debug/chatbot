@@ -89,7 +89,8 @@ def main():
         "French": "fr",
         "German": "de",
         "Chinese": "zh-cn",
-        "Hindi": "hi"
+        "Hindi": "hi",
+        "Telugu":"te"
     }
     selected_language_name = st.selectbox("Select Response Language", list(language_options.keys()))
     selected_language_code = language_options[selected_language_name]  
