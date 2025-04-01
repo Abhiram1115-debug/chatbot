@@ -93,4 +93,4 @@ watchdog==6.0.0
 yarl==1.18.3
 zstandard==0.23.0
 googletrans==4.0.0-rc1
-deep_translator
+deep_translator == 1.11.4
