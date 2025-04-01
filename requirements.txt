@@ -30,7 +30,7 @@ grpcio-status==1.71.0
 h11==0.14.0
 httpcore==1.0.7
 httplib2==0.22.0
-httpx==0.28.1
+httpx
 httpx-sse==0.4.0
 idna==3.10
 Jinja2==3.1.6
@@ -93,4 +93,4 @@ watchdog==6.0.0
 yarl==1.18.3
 zstandard==0.23.0
 googletrans==4.0.0-rc1
-deep_translator
+deep_translator  == 1.11.4
